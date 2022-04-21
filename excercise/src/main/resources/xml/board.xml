@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.sweetk.excercise.DAO.BoardDAO">
+
+    <insert id="createBoard" parameterType="com.sweetk.excercise.DTO.BoardDTO">
+        INSERT INTO CRUD_BOARD( USER_SEQ, TITLE, CONTENT, READCOUNT, IMG_SOURCE, REG_DATE)
+        VALUES( #{userSeq}, #{title}, #{content}, 0, #{imgSoruce}, NOW())
+
+    </insert>
+
+    <select id="BoardList" parameterType="java.lang.Integer" resultType="com.sweetk.excercise.DTO.BoardDTO">
+        SELECT TITLE, CONTENT, READCOUNT, IMG_SOURCE, REG_DATE, USERNAME
+        FROM CRUD_BOARD, CRUD_USER
+        WHERE CRUD_BOARD.USER_SEQ = CRUD_USER.SEQ
+
+    </select>
+
+    <select id="BoardSearchList" resultType="com.sweetk.excercise.DTO.BoardDTO">
+
+    </select>
+
+    <update id="updateBoard" parameterType="com.sweetk.excercise.DTO.BoardDTO">
+        UPDATE CRUD_BOARD SET CONTENT = #{content} WHERE SEQ = #{seq}
+
+    </update>
+
+    <delete id="deleteBoard" parameterType="com.sweetk.excercise.DTO.BoardDTO">
+        DELETE FROM CRUD_BOARD WHERE SEQ = #{seq}
+    </delete>
+
+
+</mapper>

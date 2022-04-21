@@ -6,8 +6,8 @@ import lombok.*;
 import java.util.Date;
 
 @ToString
-@NoArgsConstructor
 @AllArgsConstructor
+@NoArgsConstructor
 @Setter
 @Getter
 public class BoardDTO {
@@ -20,4 +20,8 @@ public class BoardDTO {
     private String username;
     private String imgSource;
     private Date regDate;
+
+
+
+
 }

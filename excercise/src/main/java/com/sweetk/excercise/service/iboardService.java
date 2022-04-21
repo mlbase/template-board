@@ -1,15 +1,10 @@
-package com.sweetk.excercise.DAO;
+package com.sweetk.excercise.service;
 
 import com.sweetk.excercise.DTO.BoardDTO;
-import org.apache.ibatis.annotations.Mapper;
-import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
-@Mapper
-@Repository
-public interface BoardDAO {
-
+public interface iboardService {
     boolean createBoard(BoardDTO dto);
 
     List<BoardDTO> BoardList(int PageNumber);
@@ -19,5 +14,4 @@ public interface BoardDAO {
     boolean deleteBoard(BoardDTO dto);
 
     boolean updateBoard(BoardDTO dto);
-
 }

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.sweetk.excercise.DAO.UserDAO">
+
+    <insert id="createUser" parameterType="com.sweetk.excercise.DTO.UserDTO">
+        INSERT INTO CRUD_USER( USER_ID, PASSWORD, USER_NAME, NICKNAME, EMAIL, REG_DATE)
+        VALUES( #{userId}, #{password}, #{username}, #{nickname}, #{email}, NOW() )
+    </insert>
+    
+    <select id="login" parameterType="java.lang.String" resultType="com.sweetk.excercise.DTO.UserDTO">
+        SELECT USER_ID, PASSWORD, USER_NAME, NICKNAME, EMAIL, REG_DATE
+        FROM CRUD_USER
+        WHERE USER_ID = #{userId}
+
+    </select>
+
+    <update id="changePassword" parameterType="com.sweetk.excercise.DTO.UserDTO">
+
+
+    </update>
+</mapper>

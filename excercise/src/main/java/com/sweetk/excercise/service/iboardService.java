@@ -14,4 +14,13 @@ public interface iboardService {
     boolean deleteBoard(BoardDTO dto);
 
     boolean updateBoard(BoardDTO dto);
+
+    List<BoardDTO> BoardnosortList();
+
+    BoardDTO BoardDetail(int seq);
+
+    boolean BoardRead(int seq);
+
+    Integer totalNumber();
+
 }

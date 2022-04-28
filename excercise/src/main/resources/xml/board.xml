@@ -4,19 +4,45 @@
 <mapper namespace="com.sweetk.excercise.DAO.BoardDAO">
 
     <insert id="createBoard" parameterType="com.sweetk.excercise.DTO.BoardDTO">
-        INSERT INTO CRUD_BOARD( USER_SEQ, TITLE, CONTENT, READCOUNT, IMG_SOURCE, REG_DATE)
-        VALUES( #{userSeq}, #{title}, #{content}, 0, #{imgSoruce}, NOW())
+        INSERT INTO CRUD_BOARD( USER_SEQ, TITLE, CONTENT, READCOUNT, REG_DATE)
+        VALUES( #{userSeq}, #{title}, #{content}, 0, NOW())
 
     </insert>
 
     <select id="BoardList" parameterType="java.lang.Integer" resultType="com.sweetk.excercise.DTO.BoardDTO">
-        SELECT TITLE, CONTENT, READCOUNT, IMG_SOURCE, REG_DATE, USERNAME
+        SELECT A.SEQ, TITLE, READCOUNT, READCOUNT, USER_NAME, A.REG_DATE
+        FROM
+        (SELECT SEQ, TITLE, READCOUNT, REG_DATE, USER_SEQ ,RANK() OVER(ORDER BY REG_DATE DESC) AS RNUM
+        FROM crud_board) AS A, CRUD_USER
+        WHERE A.USER_SEQ = CRUD_USER.SEQ
+        AND RNUM BETWEEN ${PageNumber-1}*10 + 1 AND ${PageNumber}*10
+        ORDER BY RNUM
+
+
+    </select>
+
+    <select id="BoardnosortList" parameterType="java.lang.Integer" resultType="com.sweetk.excercise.DTO.BoardDTO">
+        SELECT CRUD_BOARD.SEQ, TITLE, CONTENT, READCOUNT, IMG_SOURCE,
+        DATE_FORMAT(CRUD_BOARD.REG_DATE, "%M-%D %T") AS REG_DATE, USER_NAME
         FROM CRUD_BOARD, CRUD_USER
         WHERE CRUD_BOARD.USER_SEQ = CRUD_USER.SEQ
 
     </select>
 
+    <update id="BoardRead" parameterType="java.lang.Integer">
+        UPDATE CRUD_BOARD SET READCOUNT = READCOUNT+1 WHERE SEQ = #{seq}
+    </update>
+
     <select id="BoardSearchList" resultType="com.sweetk.excercise.DTO.BoardDTO">
+
+    </select>
+
+    <select id="BoardDetail" parameterType="java.lang.Integer" resultType="com.sweetk.excercise.DTO.BoardDTO">
+        SELECT  TITLE, CONTENT, READCOUNT, IMG_SOURCE,
+        CRUD_BOARD.REG_DATE, USER_NAME
+        FROM CRUD_BOARD, CRUD_USER
+        WHERE CRUD_BOARD.USER_SEQ = CRUD_USER.SEQ AND
+        CRUD_BOARD.SEQ = ${seq}
 
     </select>
 
@@ -28,6 +54,11 @@
     <delete id="deleteBoard" parameterType="com.sweetk.excercise.DTO.BoardDTO">
         DELETE FROM CRUD_BOARD WHERE SEQ = #{seq}
     </delete>
+
+    <select id="totalNumber" resultType="java.lang.Integer">
+        SELECT COUNT(*)
+        FROM CRUD_BOARD
+    </select>
 
 
 </mapper>

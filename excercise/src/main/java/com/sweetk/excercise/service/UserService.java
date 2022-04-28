@@ -27,4 +27,14 @@ public class UserService implements iuserService{
     public Boolean changePassword(String password) {
         return dao.changePassword(password);
     }
+
+    @Override
+    public UserDTO idcheck(String userId) {
+        return dao.idcheck(userId);
+    }
+
+    @Override
+    public UserDTO findseq(String username) {
+        return dao.findseq(username);
+    }
 }

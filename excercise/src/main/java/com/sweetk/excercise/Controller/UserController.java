@@ -17,53 +17,72 @@ public class UserController {
     PasswordEncoder encoder;
 
     @PostMapping("/sign-up")
-    public String createUser(@RequestBody UserDTO dto) {
-        String s = "회원가입에 실패했습니다";
+    public String createUser(UserDTO dto) {
+        String sign_up_message = "회원가입에 실패했습니다";
 
         System.out.println(dto.toString());
 
-        boolean b = false;
+        boolean signCheck = false;
 
         String pwd = dto.getPassword();
 
         dto.setPassword(encoder.encode(pwd));
 
-        b = service.createUser(dto);
+        signCheck = service.createUser(dto);
 
-        System.out.println(b);
+        //System.out.println(b);
 
-        if(b){
-            s = "회원가입에 성공했습니다";
+        if(signCheck){
+            sign_up_message = "OK";
         }
 
-        return s;
+        return sign_up_message;
     }
 
     @PostMapping("/login")
-    public UserDTO loginUser(@RequestBody UserDTO dto){
+    public UserDTO loginUser(UserDTO dto){
 
 
         String pwd = dto.getPassword();
 
-        //System.out.println(pwd);
+        //System.out.println(dto.toString());
 
         UserDTO userdto = service.login(dto);
 
-        boolean b = encoder.matches(pwd , dto.getPassword());
+        boolean passwordCheck = encoder.matches(pwd , userdto.getPassword());
 
-        System.out.println(b);
+        //System.out.println(b);
 
-        if(!b){
+        if(!passwordCheck){
             userdto = null;
         }
+
+        userdto.setPassword(null);
 
         return userdto;
     }
 
+    @PostMapping("/id")
+    public String idcheck(String userId){
+        String checkMsg = "no";
+
+
+        //System.out.println(userId);
+
+        UserDTO dto = service.idcheck(userId);
+
+
+        if(dto != null){
+            checkMsg = "YES";
+        }
+
+        return checkMsg;
+    }
+
     @PostMapping("/changepassword")
     public String changePassword(String password, String newPassword){
-        String s = "비밀번호 변경에 실패했습니다";
+        String changeMsg = "비밀번호 변경에 실패했습니다";
 
-        return s;
+        return changeMsg;
     }
 }

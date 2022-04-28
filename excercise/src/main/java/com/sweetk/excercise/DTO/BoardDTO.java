@@ -19,7 +19,7 @@ public class BoardDTO {
     private int readcount;
     private String username;
     private String imgSource;
-    private Date regDate;
+    private String regDate;
 
 
 

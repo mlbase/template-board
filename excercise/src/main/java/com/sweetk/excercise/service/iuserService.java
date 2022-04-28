@@ -9,4 +9,8 @@ public interface iuserService {
     UserDTO login(UserDTO dto);
 
     Boolean changePassword(String password);
+
+    UserDTO idcheck(String userId);
+
+    UserDTO findseq(String username);
 }

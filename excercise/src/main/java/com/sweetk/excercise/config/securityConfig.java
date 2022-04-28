@@ -29,7 +29,7 @@ public class securityConfig extends WebSecurityConfigurerAdapter {
                     .and()
                 .formLogin()
                     .loginPage("/login")
-                    .loginProcessingUrl("/loginprocess")
+                    .loginProcessingUrl("/idcheck")
                     .defaultSuccessUrl("/loginSuccess") // 로그인 성공 시 이동할 경로.
                     .failureUrl("/login?error=true") // 인증에 실패했을 때 보여주는 화면 url, 로그인 form으로 파라미터값 error=true로 보낸
                     .permitAll()

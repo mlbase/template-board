@@ -39,4 +39,24 @@ public class BoardService implements iboardService{
     public boolean updateBoard(BoardDTO dto) {
         return dao.updateBoard(dto);
     }
+
+    @Override
+    public List<BoardDTO> BoardnosortList() {
+        return dao.BoardnosortList();
+    }
+
+    @Override
+    public BoardDTO BoardDetail(int seq) {
+        return dao.BoardDetail(seq);
+    }
+
+    @Override
+    public boolean BoardRead(int seq) {
+        return dao.BoardRead(seq);
+    }
+
+    @Override
+    public Integer totalNumber() {
+        return dao.totalNumber();
+    }
 }

@@ -47,7 +47,7 @@
     </select>
 
     <update id="updateBoard" parameterType="com.sweetk.excercise.DTO.BoardDTO">
-        UPDATE CRUD_BOARD SET CONTENT = #{content} WHERE SEQ = #{seq}
+        UPDATE CRUD_BOARD SET TITLE = #{title}, CONTENT = #{content} WHERE SEQ = #{seq}
 
     </update>
 

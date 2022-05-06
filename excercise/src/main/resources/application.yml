@@ -3,6 +3,12 @@ server:
   port: 3000
 
 spring:
+  jwt:
+    secrete:
+      secreteKey: c3ByaW5nand07Iuc7YGs66a/7YKk7J6F64uI64ukISEhYmFzZTY066GcIOyCrOyghOyXkCDsnbjsvZTrlKntlojsirXri4jri6Qu
+  mvc:
+    pathmatch:
+      matching-strategy: ant_path_matcher
   datasource:
     hikari:
       jdbc-url: jdbc:mariadb://localhost:3309/crud_db

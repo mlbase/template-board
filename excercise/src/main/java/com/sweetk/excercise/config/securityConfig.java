@@ -40,6 +40,8 @@ public class securityConfig extends WebSecurityConfigurerAdapter {
                     .logoutSuccessUrl("/")
                     .and()
                 .csrf().disable();
+
+
     }
 
     @Bean
